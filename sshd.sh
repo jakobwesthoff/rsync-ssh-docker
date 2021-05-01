@@ -27,6 +27,7 @@ if [ ! -f ~/.is_initialized ]; then
     echo "${SSH_KEY:-}" >> /home/"$USER"/.ssh/authorized_keys
     chown -R "$USER":"$GROUP" /home/"$USER"/.ssh
     chmod -R go-wx /home/"$USER"/.ssh
+    ln -s "/data" "/home/$USER/data"
 	touch ~/.is_initialized
 fi
 
