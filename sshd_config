@@ -4,7 +4,7 @@ Protocol 2
 HostKey /etc/ssh/ssh_host_ed25519_key
 HostKey /etc/ssh/ssh_host_rsa_key
 
-AuthorizedKeysFile .ssh/authorized_keys
+AuthorizedKeysFile %h/.ssh/authorized_keys
 PasswordAuthentication no
 
 # Faster connection
@@ -19,4 +19,5 @@ AllowTcpForwarding no
 # Force sftp and chroot jail
 Subsystem sftp internal-sftp
 #ForceCommand internal-sftp
-#ChrootDirectory %h
+#ChrootDirectory %hv
+LogLevel DEBUG1
