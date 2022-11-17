@@ -18,5 +18,5 @@ AllowTcpForwarding no
 
 # Force sftp and chroot jail
 Subsystem sftp internal-sftp
-ForceCommand internal-sftp
-ChrootDirectory %h
+#ForceCommand internal-sftp
+#ChrootDirectory %h
