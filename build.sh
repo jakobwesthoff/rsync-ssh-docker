@@ -5,4 +5,4 @@ docker buildx build \
 --platform linux/arm/v7 \
 --platform linux/amd64 \
 --platform linux/386  \
---tag jakobwesthoff/rsync-ssh:1.0.0 .
+--tag jakobwesthoff/rsync-ssh:2.0.0 .

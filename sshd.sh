@@ -4,10 +4,17 @@ set -eu
 
 SSH_KEY_DIR=/etc/ssh/keys
 
-# Initialize separate volume /etc/ssh: Create sshd host keys
-[ -f $SSH_KEY_DIR/ssh_host_rsa_key ] || /usr/bin/ssh-keygen -q -t rsa -f $SSH_KEY_DIR/ssh_host_rsa_key -C '' -N ''
-[ -f $SSH_KEY_DIR/ssh_host_ecdsa_key ] || /usr/bin/ssh-keygen -q -t ecdsa -f $SSH_KEY_DIR/ssh_host_ecdsa_key -C '' -N ''
-[ -f $SSH_KEY_DIR/ssh_host_ed25519_key ] || /usr/bin/ssh-keygen -q -t ed25519 -f $SSH_KEY_DIR/ssh_host_ed25519_key -C '' -N ''
+# Initialize unique server keys
+if [ ! -f /etc/ssh/ssh_host_ed25519_key ]; then
+    ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ''
+fi
+if [ ! -f /etc/ssh/ssh_host_rsa_key ]; then
+    ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key -N ''
+fi
+
+# Restrict access from other users
+chmod 600 /etc/ssh/ssh_host_ed25519_key || true
+chmod 600 /etc/ssh/ssh_host_rsa_key || true
 
 # Initialize container volume on first run
 if [ ! -f ~/.is_initialized ]; then
